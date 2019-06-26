@@ -1,11 +1,16 @@
 #!/bin/sh
 
-set -e
+set -e -x
 
 if [[ $# -ne 1 ]] ; then
     echo "Please specify the theme vendor as the first and only argument!" >&2
     exit 5
 fi
+
+function crit() {
+    echo "$1" >&2
+    exit "${2:-1}"
+}
 
 STATIC_DIR="./pub/static/frontend"
 
@@ -15,13 +20,13 @@ THEME_DIR="${STATIC_DIR}/${THEME_VENDOR}"
 BUILD_FILE="./build.js"
 MAGEPACK="magepack"
 
-echo "Processing themes for vendor '$THEME_VENDOR'"
+echo "[INFO] Using theme vendor '$THEME_VENDOR'"
 
-[[ ! -f "$BUILD_FILE" ]] && echo "ERROR - No '$BUILD_FILE' file found in current directory" >&2 && exit 10
-which "$MAGEPACK"|| echo "ERROR - No magepack binary '$MAGEPACK' found" >&2 && exit 20
+which "$MAGEPACK" || crit "[CRITICAL] No magepack binary '$MAGEPACK' found" 10
 
-[[ ! -d "$STATIC_DIR" ]] && echo "ERROR - No magento frontend assets dir '$STATIC_DIR' found - did you already build the themes?" >&2 && exit 10
-[[ ! -d "$THEME_DIR" ]] && echo "ERROR - No vendor frontend assets dir '$THEME_DIR' found - did you already build the themes?" >&2 && exit 10
+[[ ! -f "$BUILD_FILE" ]]    && crit "[CRITICAL] No '$BUILD_FILE' file found in current directory" 20
+[[ ! -d "$STATIC_DIR" ]]    && crit "[CRITICAL] No base magento frontend assets dir '$STATIC_DIR' found - did you already build the themes?" 21
+[[ ! -d "$THEME_DIR" ]]     && crit "[CRITICAL] No vendor frontend assets dir '$THEME_DIR' found - did you already build the themes?" 22
 
 function pack_theme_lang() {
     THEME="$1"
@@ -29,7 +34,7 @@ function pack_theme_lang() {
 
     TARGET_DIR="$THEME_DIR/$THEME/$LANG"
 
-    echo "Packing theme '$THEME' language '$LANG' in '$TARGET_DIR'..."
+    echo -e "\n[INFO] Packing theme '$THEME' language '$LANG' in '$TARGET_DIR'..."
 
     magepack --bundle --config "$BUILD_FILE" --dir "$TARGET_DIR"
 }
