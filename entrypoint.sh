@@ -2,15 +2,26 @@
 
 set -e
 
+if [[ $# -ne 1 ]] ; then
+    echo "Please specify the theme vendor as the first and only argument!" >&2
+    exit 5
+fi
+
+STATIC_DIR="./pub/static/frontend"
+
 THEME_VENDOR="$1"
-THEME_DIR="pub/static/frontend/$THEME_VENDOR/"
-BUILD_FILE="build.js"
+THEME_DIR="${STATIC_DIR}/${THEME_VENDOR}"
+
+BUILD_FILE="./build.js"
 MAGEPACK="magepack"
 
 echo "Processing themes for vendor '$THEME_VENDOR'"
 
-[[ ! -f "$BUILD_FILE" ]] && echo "ERROR - No '$BUILD_FILE' file found in root directory" >&2 && exit 10
-which "$MAGEPACK" || echo "ERROR - No magepack binary '$MAGEPACK' found" >&2 && exit 20
+[[ ! -f "$BUILD_FILE" ]] && echo "ERROR - No '$BUILD_FILE' file found in current directory" >&2 && exit 10
+which "$MAGEPACK"|| echo "ERROR - No magepack binary '$MAGEPACK' found" >&2 && exit 20
+
+[[ ! -d "$STATIC_DIR" ]] && echo "ERROR - No magento frontend assets dir '$STATIC_DIR' found - did you already build the themes?" >&2 && exit 10
+[[ ! -d "$THEME_DIR" ]] && echo "ERROR - No vendor frontend assets dir '$THEME_DIR' found - did you already build the themes?" >&2 && exit 10
 
 function pack_theme_lang() {
     THEME="$1"
