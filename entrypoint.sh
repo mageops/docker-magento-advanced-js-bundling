@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e -x
+set -e
 
 if [[ $# -ne 1 ]] ; then
     echo "Please specify the theme vendor as the first and only argument!" >&2

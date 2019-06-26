@@ -61,5 +61,5 @@ RUN apk del \
 VOLUME /workdir
 WORKDIR /workdir
 
-ENTRYPOINT ["/bin/cs-bundle-js"]
+CMD ["/bin/sh"]
 
