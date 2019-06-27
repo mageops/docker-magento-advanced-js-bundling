@@ -17,7 +17,7 @@ from the stable tagged versions.
 Go to the root directory of your Magento project and execute:
 
 ```bash
-docker run -v ${PWD}:/workdir  -u $(id -u `whoami`):$(id -g `whoami`) magesuite/bundle-theme-js "{name-of-your-theme-vendor}"
+docker run -v ${PWD}:/workdir  -u $(id -u `whoami`):$(id -g `whoami`) magesuite/bundle-theme-js:stable "{name-of-your-theme-vendor}"
 ```  
 
 
