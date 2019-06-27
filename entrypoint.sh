@@ -22,7 +22,7 @@ MAGEPACK="magepack"
 
 echo "[INFO] Using theme vendor '$THEME_VENDOR'"
 
-which "$MAGEPACK" || crit "[CRITICAL] No magepack binary '$MAGEPACK' found" 10
+which "$MAGEPACK" 2>&1 > /dev/null || crit "[CRITICAL] No magepack binary '$MAGEPACK' found" 10
 
 [[ ! -f "$BUILD_FILE" ]]    && crit "[CRITICAL] No '$BUILD_FILE' file found in current directory" 20
 [[ ! -d "$STATIC_DIR" ]]    && crit "[CRITICAL] No base magento frontend assets dir '$STATIC_DIR' found - did you already build the themes?" 21
