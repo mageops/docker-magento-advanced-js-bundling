@@ -48,5 +48,11 @@ RUN chmod +x /bin/cs-bundle-js && \
 VOLUME /workdir
 WORKDIR /workdir
 
+LABEL maintainer="filip.sobalski@creativestyle.pl" \
+      org.label-schema.name="magesuite/bundle-theme-js" \
+      org.label-schema.url="https://github.com/magesuite/docker-bundle-theme-js" \
+      org.label-schema.vendor="creativestyle" \
+      org.label-schema.schema-version="1.0.0-rc1"
+
 ENTRYPOINT ["/bin/cs-bundle-js"]
 
