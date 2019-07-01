@@ -1,7 +1,6 @@
 # Dockerized MageSuite MagePack advanced JS asset bundler for Magento
 
 [![](https://images.microbadger.com/badges/image/magesuite/bundle-theme-js:stable.svg)](https://microbadger.com/images/magesuite/bundle-theme-js:stable "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/magesuite/bundle-theme-js:stable.svg)](https://microbadger.com/images/magesuite/bundle-theme-js:stable "Get your own version badge on microbadger.com")
-[![](https://images.microbadger.com/badges/image/magesuite/bundle-theme-js.svg)](https://microbadger.com/images/magesuite/bundle-theme-js "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/commit/magesuite/bundle-theme-js.svg)](https://microbadger.com/images/magesuite/bundle-theme-js "Get your own commit badge on microbadger.com")
 
 a dockerized execution environment to make your build system clean of unnecessary dependencies.
