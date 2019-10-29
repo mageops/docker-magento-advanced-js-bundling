@@ -2,12 +2,12 @@
 
 set -e
 
-if [[ $# -ne 1 ]] ; then
+if [ $# -ne 1 ] ; then
     echo "Please specify the theme vendor as the first and only argument!" >&2
     exit 5
 fi
 
-function crit() {
+crit () {
     echo "$1" >&2
     exit "${2:-1}"
 }
@@ -24,11 +24,11 @@ echo "[INFO] Using theme vendor '$THEME_VENDOR'"
 
 which "$MAGEPACK" 2>&1 > /dev/null || crit "[CRITICAL] No magepack binary '$MAGEPACK' found" 10
 
-[[ ! -f "$BUILD_FILE" ]]    && crit "[CRITICAL] No '$BUILD_FILE' file found in current directory" 20
-[[ ! -d "$STATIC_DIR" ]]    && crit "[CRITICAL] No base magento frontend assets dir '$STATIC_DIR' found - did you already build the themes?" 21
-[[ ! -d "$THEME_DIR" ]]     && crit "[CRITICAL] No vendor frontend assets dir '$THEME_DIR' found - did you already build the themes?" 22
+[ ! -f "$BUILD_FILE" ]    && crit "[CRITICAL] No '$BUILD_FILE' file found in current directory" 20
+[ ! -d "$STATIC_DIR" ]    && crit "[CRITICAL] No base magento frontend assets dir '$STATIC_DIR' found - did you already build the themes?" 21
+[ ! -d "$THEME_DIR" ]     && crit "[CRITICAL] No vendor frontend assets dir '$THEME_DIR' found - did you already build the themes?" 22
 
-function pack_theme_lang() {
+pack_theme_lang () {
     THEME="$1"
     LANG="$2"
 
@@ -39,11 +39,11 @@ function pack_theme_lang() {
     magepack --bundle --config "$BUILD_FILE" --dir "$TARGET_DIR"
 }
 
-function list_themes() {
+list_themes () {
     (cd "$THEME_DIR"; ls -1da *)
 }
 
-function list_theme_langs() {
+list_theme_langs () {
     THEME_NAME="$1"
 
     (cd "${THEME_DIR}/${THEME_NAME}"; ls -1da *)
